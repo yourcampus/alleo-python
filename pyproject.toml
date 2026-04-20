@@ -1,0 +1,52 @@
+[project]
+name = "alleo"
+dynamic = ["version"]
+description = "Official Python SDK for the Alleo Customer API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Alleo" }]
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.6",
+    "email-validator>=2.0",
+    "typing-extensions>=4.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.23",
+    "coverage[toml]>=7",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourcampus/alleo-python"
+Documentation = "https://api.yourcampus.co/customer_api/docs"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/alleo/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/alleo"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+strict = true
+files = ["src/alleo"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "strict"
+testpaths = ["tests"]
